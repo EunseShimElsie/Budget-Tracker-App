@@ -94,4 +94,4 @@ const TransactionForm = ({ transactions, setTransactions, editingTransaction, se
   );
 };
 
-export default TransationForm;
+export default TransactionForm;
