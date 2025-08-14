@@ -4,7 +4,7 @@ import CategoryForm from '../components/CategoryForm';
 import CategoryList from '../components/CategoryList';
 import { useAuth } from '../context/AuthContext';
 
-const CategoriesPage = () => {
+const CategoryPage = () => {
   const { user } = useAuth();
   const [categories, setCategories] = useState([]);
   const [editingCategory, setEditingCategory] = useState(null);
@@ -41,4 +41,4 @@ const CategoriesPage = () => {
   );
 };
 
-export default CategoriesPage;
+export default CategoryPage;
