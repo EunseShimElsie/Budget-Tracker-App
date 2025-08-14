@@ -92,3 +92,5 @@ We will send you an email to choose a Real-World project. If you face any diffic
 * Adherence to Git best practices and practical contributions.
 * Successful implementation, deploymentand CI/CD pipeline.
 * Problem-solving skills and the ability to go beyond basic requirements.
+
+JIRA board URL https://simeunse04.atlassian.net/jira/software/projects/BTA/boards/34
