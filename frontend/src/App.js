@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import TransactionsPage from './pages/TransactionsPage';
-import CategoryPage from './pages/CategoriesPage';
+import CategoryPage from './pages/CategoryPage';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/transactions" element={<TransactionsPage />} />
-        <Route path="/categories" element={<CategoryPage />} /> 
+        <Route path="/category" element={<CategoryPage />} /> 
       </Routes>
     </Router>
   );
