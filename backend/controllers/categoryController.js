@@ -11,7 +11,7 @@ const getCategories = async (req, res) => {
 };
 
 // Create
-const addCategory = async (req, res) => {
+const createCategory = async (req, res) => {
   const { name, type } = req.body;
   try {
     if (!name || !type) {
@@ -58,4 +58,4 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-module.exports = { getCategories, addCategory, updateCategory, deleteCategory };
+module.exports = { getCategories, createCategory, updateCategory, deleteCategory };

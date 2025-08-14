@@ -11,7 +11,7 @@ const getTransactions = async (req, res) => {
 };
 
 // Create
-const addTransaction = async (req, res) => {
+const createTransaction = async (req, res) => {
   const { amount, date, type, category, note } = req.body;
   try {
     if (!amount || amount <= 0) return res.status(400).json({ message: 'Amount must be greater than 0' });
@@ -64,4 +64,4 @@ const deleteTransaction = async (req, res) => {
   }
 };
 
-module.exports = { getTransactions, addTransaction, updateTransaction, deleteTransaction };
+module.exports = { getTransactions, createTransaction, updateTransaction, deleteTransaction };
