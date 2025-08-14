@@ -3,7 +3,7 @@ name: Budget Tracker CI
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   test:
@@ -14,17 +14,17 @@ jobs:
         node-version: [22]
     environment: MONGO_URI
     steps:
-      # 1. Checkout Code
+      # 1. Checkout repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # 2. Install Node.js
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      # 3. Debuging
+      # 3. Print environment variables
       - name: Print Env Secret
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
@@ -35,8 +35,8 @@ jobs:
           echo "Secret 2 is: $JWT_SECRET"
           echo "Secret 3 is: $PORT"
 
-      # 4. Stop AWS service 
-      - run: pm2 stop all
+      # 4. Stop all PM2 processes on AWS
+      - run: pm2 stop all || true
 
       # 5. Install Backend Dependencies
       - name: Install Backend Dependencies
@@ -46,7 +46,7 @@ jobs:
           yarn --version
           yarn install
 
-      # 6. Install Frontend Dependencies
+      # 6. Install Frontend Dependencies & Build
       - name: Install Frontend Dependencies
         working-directory: ./frontend
         run: |
@@ -64,15 +64,15 @@ jobs:
         working-directory: ./backend
         run: npm test
 
-      # 8. npm ci
+      # 8. Install dependencies using npm ci (as per tutorial)
       - run: npm ci
 
-      # 9. Create .env
+      # 9. Create .env for production
       - run: |
           cd ./backend
           touch .env
           echo "${{ secrets.PROD }}" > .env
 
-      # 10. Restart
+      # 10. Start & Restart PM2 processes
       - run: pm2 start all
       - run: pm2 restart all
