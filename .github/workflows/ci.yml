@@ -24,7 +24,16 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # 3. Print environment variables
+      # 3. Cache node modules
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # 4. Print environment variables
       - name: Print Env Secret
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
@@ -35,10 +44,10 @@ jobs:
           echo "Secret 2 is: $JWT_SECRET"
           echo "Secret 3 is: $PORT"
 
-      # 4. Stop all PM2 processes on AWS
+      # 5. Stop all PM2 processes on AWS
       - run: pm2 stop all || true
 
-      # 5. Install Backend Dependencies
+      # 6. Install Backend Dependencies
       - name: Install Backend Dependencies
         working-directory: ./backend
         run: |
@@ -46,7 +55,7 @@ jobs:
           yarn --version
           yarn install
 
-      # 6. Install Frontend Dependencies & Build
+      # 7. Install Frontend Dependencies & Build
       - name: Install Frontend Dependencies
         working-directory: ./frontend
         run: |
@@ -55,7 +64,7 @@ jobs:
           yarn install
           yarn run build
 
-      # 7. Run Backend Tests
+      # 8. Run Backend Tests
       - name: Run Backend Tests
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
@@ -63,9 +72,6 @@ jobs:
           PORT: ${{ secrets.PORT }}
         working-directory: ./backend
         run: npm test
-
-      # 8. Install dependencies using npm ci (as per tutorial)
-      - run: npm ci
 
       # 9. Create .env for production
       - run: |
