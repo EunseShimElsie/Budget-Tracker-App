@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '../axiosConfig';
 import CategoryForm from '../components/CategoryForm';
-import CategoryList from '../components/CategoryList';
+import CategoryList from '../components/CategoryList.jsx';
 import { useAuth } from '../context/AuthContext';
 
 const CategoryPage = () => {
@@ -13,15 +13,21 @@ const CategoryPage = () => {
     const fetchCategories = async () => {
       try {
         const response = await axiosInstance.get('/api/categories', {
-          headers: { Authorization: `Bearer ${user.token}` },
+          headers: { 
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
         });
         setCategories(response.data);
       } catch (error) {
+        console.error(error);
         alert('Failed to fetch categories.');
       }
     };
 
-    fetchCategories();
+    if (user?.token) { 
+      fetchCategories();
+    }
   }, [user]);
 
   return (
