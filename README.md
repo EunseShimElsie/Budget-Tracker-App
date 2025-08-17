@@ -21,19 +21,24 @@ A full-stack web application that allows users to track their income, expenses, 
 ---
 
 ## Public URL
-13.210.117.196
+Application is accessible via:  
+http://13.210.117.196
 
 ---
 
-## Login Credentials (Demo)
-Use the following credentials to access the dashboard:  
-
+## Demo Login Credentials
 - **Username (Email):** `test1234@naver.com`  
 - **Password:** `test1234!!`  
 
 ---
 
-## Setup Instructions
+## Install Dependencies
+npm run install-all
+
+## Run Locally
+npm run dev
+npm start
+
 
 ### Clone Repository
 git clone https://github.com/EunseShimElsie/budget-tracker-app.git
